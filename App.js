@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import { Button, Text, Image, View, StyleSheet } from 'react-native';
+import { Alert, Button, Text, Image, View, StyleSheet } from 'react-native';
 
 import Icon from 'react-native-vector-icons/FontAwesome';
 
@@ -53,10 +53,25 @@ function Home() {
   );
 }
 
+function LogoTitle() {
+  return (
+    <View style={{justifyContent: 'flex-end', backgroundColor: 'cornflowerblue'}}>
+      <Ionicons onPress={() => Alert.alert('test', 'ting')} name="ios-menu" size={32} color="#444" />
+    </View>
+  );
+}
+
 function MainStack() {
   return (
     <Stack.Navigator>
-    <Stack.Screen name="Home" component={Home} />
+    <Stack.Screen name="Home" component={Home}
+      options={{
+        // headerTitle: () => <LogoTitle />,
+        headerRight: () => (
+          <Ionicons style={{marginRight: 20}} onPress={() => Alert.alert('test', 'ting')} name="ios-menu" size={32} color="#444" />
+        ),
+      }}
+    />
     <Stack.Screen name="Profile" component={Profile} />
     <Stack.Screen name="Settings" component={Settings} />
   </Stack.Navigator>
