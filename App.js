@@ -55,9 +55,7 @@ function Home() {
 
 function LogoTitle() {
   return (
-    <View style={{justifyContent: 'flex-end', backgroundColor: 'cornflowerblue'}}>
-      <Ionicons onPress={() => Alert.alert('test', 'ting')} name="ios-menu" size={32} color="#444" />
-    </View>
+    <Ionicons onPress={() => Alert.alert('test', 'ting')} name="ios-menu" size={32} color="#444" />
   );
 }
 
@@ -72,8 +70,8 @@ function MainStack() {
         ),
       }}
     />
-    <Stack.Screen name="Profile" component={Profile} />
-    <Stack.Screen name="Settings" component={Settings} />
+    <Stack.Screen name="Profile" component={Profile} options={({ route }) => ({ title: route.params.name })} />
+    <Stack.Screen name="Settings" component={Settings} options={{header: () => null}} />
   </Stack.Navigator>
   )
 }
@@ -110,7 +108,7 @@ function Settings({navigation}) {
     <View style={styles.container}>
       <Text>Settings Page</Text>
       <Button
-        title='buttin' onPress={() => navigation.popToTop()}
+        title='pop to Top' onPress={() => navigation.popToTop()}
       />
     </View>
   )
@@ -120,7 +118,7 @@ function Feed({navigation}) {
   return (
     <View>
       <Text style={styles.container}>Feed Page</Text>
-      <Button title='My Profile' onPress={() => navigation.navigate('Profile')} />
+      <Button title='My Profile' onPress={() => navigation.navigate('Profile',  {name: 'Custom profile header' })} />
       <Button title='Settings' onPress={() => navigation.navigate('Settings')} />
     </View>
   )
